@@ -14,7 +14,12 @@ const nextConfig: NextConfig = {
     : {}),
   images: {
     formats: ["image/avif", "image/webp"],
-    unoptimized: pages,
+    ...(pages
+      ? {
+          loader: "custom" as const,
+          loaderFile: "./image-loader.ts",
+        }
+      : {}),
   },
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,

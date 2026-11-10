@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
+import imageLoader from "@/image-loader";
 
 export type PresentationSlide = {
   src: string;
@@ -40,7 +41,7 @@ export function PresentationViewer({
     const next = slides[current + 1];
     if (!next) return;
     const image = new window.Image();
-    image.src = next.src;
+    image.src = imageLoader({ src: next.src });
   }, [current, slides]);
 
   useEffect(() => {
