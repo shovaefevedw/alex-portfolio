@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f2f0eb;
+  --color-ink: #181818;
+  --color-muted: #5a5a5a;
+  --color-accent: #c7ff3d;
+  --color-dark: #171717;
+  --color-mist: #a3a3a3;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-paper);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  overflow-x: clip;
+  text-rendering: geometricPrecision;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
+#top {
+  scroll-margin-top: 0;
+}
+
+@media (max-height: 880px) {
+  #top {
+    padding-bottom: 1.25rem;
+  }
+
+  .hero-title {
+    margin-top: 1rem;
+    font-size: clamp(3.25rem, 8.4vw, 8rem);
+  }
+}
+
+#work,
+#about,
+#contact {
+  scroll-margin-top: 0.75rem;
+}
+
+.home .kicker {
+  font-size: 0.8125rem;
+}
+
+@utility kicker {
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.link-line {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1px;
+  padding-bottom: 0.12em;
+  transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-line:hover,
+.link-line:focus-visible,
+.link-line[data-active="true"] {
+  background-size: 100% 1px;
+}
+
+.media-zoom {
+  transform: scale(1);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .media-zoom,
+.group:focus-visible .media-zoom {
+  transform: scale(1.02);
+}
+
+.nudge-down,
+.nudge-up {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .nudge-down,
+.group:focus-visible .nudge-down {
+  transform: translateY(3px);
+}
+
+.group:hover .nudge-up,
+.group:focus-visible .nudge-up {
+  transform: translateY(-3px);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 70;
+  transform: translateY(-160%);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  padding: 0.55rem 0.8rem;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .media-zoom,
+  .nudge-down,
+  .nudge-up,
+  .link-line {
+    transition: none;
+  }
+
+  .group:hover .media-zoom,
+  .group:focus-visible .media-zoom,
+  .group:hover .nudge-down,
+  .group:focus-visible .nudge-down,
+  .group:hover .nudge-up,
+  .group:focus-visible .nudge-up {
+    transform: none;
+  }
+}
