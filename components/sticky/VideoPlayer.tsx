@@ -2,6 +2,11 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 
+function withBase(path: string) {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  return path.startsWith("/") ? `${base}${path}` : path;
+}
+
 function clock(value: number) {
   if (!Number.isFinite(value) || value < 0) return "0:00";
   const total = Math.floor(value);
@@ -119,14 +124,14 @@ export function VideoPlayer({
           <video
             ref={videoRef}
             className="h-full w-full"
-            poster={poster}
+            poster={withBase(poster)}
             preload="metadata"
             playsInline
             width={width}
             height={height}
             onClick={toggle}
           >
-            <source src={src} type="video/mp4" />
+            <source src={withBase(src)} type="video/mp4" />
           </video>
         )}
       </div>

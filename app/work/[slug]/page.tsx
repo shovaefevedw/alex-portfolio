@@ -8,7 +8,7 @@ import { getProject, projects } from "@/data/projects";
 type Params = { slug: string };
 
 export function generateStaticParams() {
-  return projects
+  const params = projects
     .filter(
       (project) =>
         project.slug !== "birds-in-the-cage" &&
@@ -16,6 +16,9 @@ export function generateStaticParams() {
         project.slug !== "sticky",
     )
     .map((project) => ({ slug: project.slug }));
+
+  // Static export rejects a dynamic route that generates nothing.
+  return params.length > 0 ? params : [{ slug: "_none" }];
 }
 
 export async function generateMetadata({

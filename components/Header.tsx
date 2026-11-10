@@ -64,7 +64,8 @@ export function Header() {
     };
   }, [pathname]);
 
-  const hrefFor = (hash: string) => (pathname === "/" ? hash : `/${hash}`);
+  const hrefFor = (hash: string) =>
+    pathname === "/" ? hash : `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/${hash}`;
 
   const isActive = (id: string) => {
     if (pathname.startsWith("/work")) return id === "work";
